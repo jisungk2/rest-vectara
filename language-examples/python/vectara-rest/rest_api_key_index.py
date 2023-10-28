@@ -7,20 +7,15 @@ import requests
 
 def _get_index_request_json(customer_id: int, corpus_id: int):
     """ Returns some example data to index. """
+
+    f = open("output.txt", "r")
+
     document = {}
     document["document_id"] = "doc-id-2"
     # Note that the document ID must be unique for a given corpus
-    document["title"] = "Another example Title"
-    document["metadata_json"] = json.dumps(
-        {
-            "book-name": "Another example title",
-            "collection": "Mathematics",
-            "author": "Example Author"
-        }
-    )
     sections = []
     section = {}
-    section["text"] = "The answer to the ultimate question of life, the universe, and everything is 42."
+    section["text"] = f.read()
     sections.append(section)
     document["section"] = sections
 
@@ -31,7 +26,7 @@ def _get_index_request_json(customer_id: int, corpus_id: int):
 
     return json.dumps(request)
 
-def index_document(customer_id: int, corpus_id: int, idx_address: str, jwt_token: str):
+def index_document(customer_id: int, corpus_id: int, idx_address: str, api_key: str):
     """ Indexes content to the corpus.
     Args:
         customer_id: Unique customer ID in vectara platform.
@@ -45,7 +40,7 @@ def index_document(customer_id: int, corpus_id: int, idx_address: str, jwt_token
     """
 
     post_headers = {
-        "Authorization": f"Bearer {jwt_token}",
+        "x-api-key": f"{api_key}",
         "customer-id": f"{customer_id}"
     }
     response = requests.post(

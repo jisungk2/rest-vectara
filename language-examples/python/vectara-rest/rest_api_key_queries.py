@@ -60,33 +60,4 @@ def query(customer_id: int, corpus_id: int, query_address: str, api_key: str, qu
                        response.text)
         return response, False
         
-    print(response.text)
     return response, True
-
-
-
-if __name__ == "__main__":
-    logging.basicConfig(
-        format="%(asctime)s %(levelname)-8s %(message)s", level=logging.INFO)
-
-    parser = argparse.ArgumentParser(
-                description="Vectara rest example (With API Key authentication.")
-
-    parser.add_argument("--customer-id", type=int, help="Unique customer ID in Vectara platform.")
-    parser.add_argument("--corpus-id",
-                        type=int,
-                        help="Corpus ID to which data will be indexed and queried from.")
-
-    parser.add_argument("--serving-endpoint", help="The endpoint of querying server.",
-                        default="api.vectara.io")
-    parser.add_argument("--api-key", help="API key retrieved from Vectara console.")
-    parser.add_argument("--query", help="Query to run against the corpus.", default="Test query")
-
-    args = parser.parse_args()
-
-    if args:
-        error, status = query(args.customer_id,
-                              args.corpus_id,
-                              args.serving_endpoint,
-                              args.api_key,
-                              args.query)

@@ -2,6 +2,7 @@
 """
 
 from authlib.integrations.requests_client import OAuth2Session
+import requests
 
 def _get_jwt_token(auth_url: str, app_client_id: str, app_client_secret: str):
     """Connect to the server and get a JWT token."""
