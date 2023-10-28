@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Google.Api.CommonProtos" Version="2.6.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.21.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.47.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="/tmp/protos/protoc-gen-openapiv2/**/*.proto" AdditionalImportDirs="/tmp/protos/"/>
+    <Protobuf Include="../../../protos/admin.proto" GrpcServices="Client" AdditionalImportDirs="../../../protos/;/tmp/protos/" />
+    <Protobuf Include="../../../protos/common.proto" GrpcServices="Client" AdditionalImportDirs="../../../protos/" />
+    <Protobuf Include="../../../protos/custom_dim.proto" GrpcServices="Client" />
+    <Protobuf Include="../../../protos/indexing.proto" GrpcServices="Client" AdditionalImportDirs="../../../protos/" />
+    <Protobuf Include="../../../protos/services.proto" GrpcServices="Client" AdditionalImportDirs="../../../protos/;/tmp/protos/" /> 
+    <Protobuf Include="../../../protos/serving.proto" GrpcServices="Client" AdditionalImportDirs="../../../protos/;/tmp/protos/" />
+    <Protobuf Include="../../../protos/status.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\common\common.csproj" />
+  </ItemGroup>
+
+</Project>
